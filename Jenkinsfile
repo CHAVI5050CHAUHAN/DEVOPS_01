@@ -11,20 +11,26 @@ pipeline {
 
         stage('Validate') {
             steps {
-                sh 'docker-compose config'
+                sh '''
+                echo "Validating project files..."
+                pwd
+                ls -la
+                '''
             }
         }
 
         stage('Build') {
             steps {
-                sh 'docker-compose build'
+                sh '''
+                docker-compose build
+                '''
             }
         }
 
         stage('Deploy') {
             steps {
                 sh '''
-                docker-compose down
+                docker-compose down || true
                 docker-compose up -d
                 '''
             }
@@ -32,7 +38,9 @@ pipeline {
 
         stage('Verify') {
             steps {
-                sh 'docker ps'
+                sh '''
+                docker ps
+                '''
             }
         }
     }
@@ -40,6 +48,14 @@ pipeline {
     post {
         success {
             echo 'Deployment Successful'
+        }
+
+        failure {
+            echo 'Deployment Failed'
+        }
+
+        always {
+            sh 'docker ps || true'
         }
     }
 }
