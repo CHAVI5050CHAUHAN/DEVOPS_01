@@ -11,26 +11,35 @@ pipeline {
 
         stage('Validate') {
             steps {
-                sh 'echo "Validation Successful"'
-                sh 'ls -la'
+                sh '''
+                pwd
+                ls -la
+                '''
             }
         }
 
         stage('Build') {
             steps {
-                sh 'docker --version'
+                sh '''
+                docker-compose build
+                '''
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'echo "Application Deployment Stage Completed"'
+                sh '''
+                docker-compose down || true
+                docker-compose up -d
+                '''
             }
         }
 
         stage('Verify') {
             steps {
-                sh 'docker ps'
+                sh '''
+                docker ps
+                '''
             }
         }
     }
