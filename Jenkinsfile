@@ -5,13 +5,13 @@ pipeline {
 
         stage('Checkout') {
             steps {
+                echo 'Pulling latest code from GitHub'
                 checkout scm
             }
         }
 
         stage('Validate') {
             steps {
-                sh 'echo "Validation Successful"'
                 sh 'ls -la'
             }
         }
@@ -24,7 +24,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'echo "Application Deployment Stage Completed"'
+                echo 'Application Deployment Completed'
             }
         }
 
@@ -43,4 +43,4 @@ pipeline {
             echo 'Deployment Failed'
         }
     }
-
+}
