@@ -18,15 +18,15 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    docker compose down || true
-                    docker compose up -d
+                    docker-compose down || true
+                    docker-compose up -d
                 '''
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'docker compose up -d'
+                echo 'docker-compose up -d'
             }
         }
 
