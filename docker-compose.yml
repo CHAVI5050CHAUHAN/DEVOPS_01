@@ -14,7 +14,7 @@ services:
       - app-network
 
   php:
-    build: ./php
+    image: php:7.3-fpm
     container_name: php-fpm
     volumes:
       - ./php:/var/www/html
