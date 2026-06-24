@@ -20,6 +20,7 @@ pipeline {
                 echo 'docker compose up -d'
             }
         }
+    }
 
     post {
         success {
