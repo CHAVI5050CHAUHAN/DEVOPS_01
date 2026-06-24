@@ -21,13 +21,6 @@ pipeline {
             }
         }
 
-        stage('Verify') {
-            steps {
-                sh 'docker ps'
-            }
-        }
-    }
-
     post {
         success {
             echo 'Deployment Successful'
